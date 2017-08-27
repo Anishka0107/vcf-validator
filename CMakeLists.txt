@@ -16,7 +16,6 @@ endif(NOT CMAKE_BUILD_TYPE)
 
 include_directories (inc)
 include_directories (lib)
-
 # Application modules
 
 set (MOD_ODB_SOURCES)
@@ -118,6 +117,9 @@ if (BUILD_STATIC)
 endif (BUILD_STATIC)
 
 # Dependency libraries
+include_directories (/usr/include/x86_64-linux-gnu)        # had to add this because it was unable to find 'gnu/stub.h'
+include_directories(/usr/local/include)   # had to add this because it was unable to find 'odb/pre.hxx', 'odb/version.hxx' and similar files of odb
+set (Boost_INCLUDE_DIR "/home/anishka/Downloads/boost_1_64_0")
 find_package (Boost COMPONENTS filesystem program_options regex system REQUIRED )
 include_directories (${Boost_INCLUDE_DIR} )
 
@@ -125,7 +127,7 @@ add_library(sqlite3 lib/sqlite/sqlite3.c)
 find_package (Threads REQUIRED)
 
 if (BUILD_STATIC)
-  set (ODB_PATH "/usr/local/lib" CACHE STRING "Path to ODB libraries installation folder")
+    set (ODB_PATH "/home/anishka/Downloads/odb" CACHE STRING "Path to ODB libraries installation folder")
 
   set (LIBRARIES_TO_LINK
         mod_vcf

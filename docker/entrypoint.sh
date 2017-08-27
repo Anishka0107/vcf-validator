@@ -11,6 +11,6 @@ mkdir -p /tmp/build
 cd /tmp/build
 
 # Build a static binary
-cmake -DBUILD_STATIC=1 ..
+cmake -DBUILD_STATIC=1 -DCMAKE_TOOLCHAIN_FILE=../Toolchain-mingw64.cmake ..
+####cmake -DBUILD_STATIC=1 .. -DBoost_DEBUG=ON
 make -j${NPROCS}
-
